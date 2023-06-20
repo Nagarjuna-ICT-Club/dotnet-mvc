@@ -1,0 +1,50 @@
+@{
+  ViewData["Title"] = "Product Page";
+}
+
+<div class="text-center">
+  <h1 class="display-4">Welcome to Product Page</h1>
+  <a asp-controller="Product" asp-action="NewProduct">Create a new Product</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (ProductModel product in Model)
+      {
+        <tr class="flex gap-5">
+          <td>@product.id</td>
+          <td>@product.title</td>
+          <td>@product.price</td>
+          <td>
+            <a
+              asp-action="Detail"
+              asp-route-id="@product.id"
+              class="btn btn-primary"
+              >View</a
+            >
+            <a
+              asp-action="UpdateProduct"
+              asp-route-id="@product.id"
+              class="btn btn-primary"
+              >Edit</a
+            >
+            <a
+              asp-action="Delete"
+              asp-route-id="@product.id"
+              class="btn btn-danger"
+              >Delete</a
+            >
+          </td>
+        </tr>
+
+      }
+    </tbody>
+  </table>
+</div>
+

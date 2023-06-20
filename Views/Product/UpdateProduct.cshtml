@@ -1,0 +1,27 @@
+@{
+@using MvcMovie.Models;
+@model ProductModel;
+
+}
+
+<div class="" style="diplay:flex;flex-direction:column;gap:10px;">
+    <p>@ViewData["Product"]</p>
+    <h2>Create Product</h2>
+    <form method="post" asp-action="UpdateProduct" asp-controller="Product" style="display:flex;flex-direction:column;gap:10px;" >
+        <input type="hidden" asp-for="id">
+        <span asp-validation-for="id"></span>
+
+        <label for="title">title:</label>
+        <input type="text" asp-for="title">
+        <span asp-validation-for="title"></span>
+
+
+        <label for="price">Price</label>
+        <input type="text" asp-for="price">
+        <span asp-validation-for="price"></span>
+
+
+        <input type="submit" value="Create Product" class="btn btn-success">
+
+    </form>
+</div>

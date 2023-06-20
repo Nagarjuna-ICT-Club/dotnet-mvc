@@ -1,0 +1,33 @@
+@{
+@using MvcMovie.Models;
+@model MovieViewModel;
+
+}
+
+<div class="" style="diplay:flex;flex-direction:column;gap:10px;">
+    <p>@ViewData["movie"]</p>
+    <h2>Create Movie</h2>
+    <form method="post" asp-action="NewMovie" asp-controller="Movie" style="display:flex;flex-direction:column;gap:10px;" >
+        <label asp-for="id">Id:</label>
+        <input type="text" asp-for="id">
+        <span asp-validation-for="id"></span>
+
+        <label for="genre">Genre:</label>
+        <input type="text" asp-for="genre">
+        <span asp-validation-for="genre"></span>
+
+
+        <label for="Title">Title:</label>
+        <input type="text" asp-for="Title">
+        <span asp-validation-for="Title"></span>
+
+
+        <label for="releaseDate">Release Date</label>
+        <input type="date" asp-for="releaseDate">
+        <span asp-validation-for="releaseDate"></span>
+
+
+        <input type="submit" value="Create Movie" class="btn btn-success">
+
+    </form>
+</div>

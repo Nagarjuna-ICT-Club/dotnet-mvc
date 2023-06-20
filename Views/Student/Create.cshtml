@@ -1,0 +1,27 @@
+@{
+    @using MvcMovie.Models;
+    @model Student;
+}
+
+<div class="" style="diplay:flex;flex-direction:column;gap:10px;">
+    <h2>Create Student</h2>
+    <form method="post" asp-action="Create" asp-controller="Student" style="display:flex;flex-direction:column;gap:10px;" >
+        <input type="hidden" asp-for="ID">
+
+        <label for="LastName">LastName:</label>
+        <input type="text" asp-for="LastName">
+        <span asp-validation-for="LastName"></span>
+
+
+        <label for="FirstName">FirstName</label>
+        <input type="text" asp-for="FirstName">
+        <span asp-validation-for="FirstName"></span>
+
+        <label for="EnrollmentDate">EnrollmentDate</label>
+        <input type="date" asp-for="EnrollmentDate">
+        <span asp-validation-for="EnrollmentDate"></span>
+
+        <input type="submit" value="Create Student" class="btn btn-success">
+
+    </form>
+</div>

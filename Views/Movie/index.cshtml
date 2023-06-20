@@ -1,0 +1,48 @@
+@{
+  ViewData["Title"] = "Movie Page";
+}
+
+<div class="text-center">
+  <h1 class="display-4">Welcome to Movie Page</h1>
+  <a asp-controller="Movie" asp-action="NewMovie" >Create a new Movie</a>
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Genre</th>
+        <th>Title</th>
+        <th>ReleaseDate</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (MovieViewModel movie in Model)
+      {
+        <tr class="flex gap-5">
+          <td>@movie.id</td>
+          <td>@movie.genre</td>
+          <td>@movie.Title</td>
+          <td>@movie.releaseDate</td>
+          <div style="diplay:flex;gap:5px;">
+            <a
+              asp-action="Detail"
+              asp-route-id="@movie.id"
+              class="btn btn-primary"
+              >View</a
+            >
+            <a
+              asp-action="Edit"
+              asp-route-id="@movie.id"
+              class="btn btn-primary"
+              >Edit</a
+            >
+            <a asp-action="Delete" asp-route-id="@movie.id" class="btn btn-danger"
+              >Delete</a
+            >
+          </div>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+
