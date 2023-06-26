@@ -1,28 +1,22 @@
+# Table of Contents
+
+- [Introduction to Dotnet](#introduction-to-dotnet)
+- [Installation](#installation)
+- [MVC Architecture](#mvc-architecture)
+- [How MVC Works](#how-mvc-works)
+- [Folder Structure of Dotnet MVC App](#folder-structure-of-dotnet-mvc-app)
+- [Basic Crud Example](#basic-crud-example)
+- [Entity Framework Core](#entity-framework-core)
+- [Entity Framework Core Installation](#entity-framework-core-installation)
+- [Entity Framework Core Model](#entity-framework-core-model)
+  - [Creating the database Context](#creating-the-database-context)
+    - [Register the Context](#register-the-context)
+  - [Migrations](#migrations)
+  - [Create Your Initial Migration](#create-your-initial-migration)
+
 ## Introduction to Dotnet
 
 On Dotnet MVC, CRUD operations are carried out.One of the Entity Framework examples was created using [Microsoft's](https://learn.microsoft.com/en-us/aspnet/core/data/ef-mvc/?view=aspnetcore-7.0) official documentation.
-
-## We'll go through
-
-1. What is MVC architecture ?
-2. How MVC Works ?
-3. Folder Structure for MVC Pattern
-4. Basic CRUD Example without Entity Framework
-5. What is Entity Framework ?
-6. Create Data Model
-7. Create the database Context
-8. Register the database Context
-9. Create Controller and Views
-10. Asynchronous Code
-
-## Table of Contents
-
-- [Introduction to Dotnet](#introduction-to-dotnet)
-  - [We'll go through](#well-go-through)
-  - [Table of Contents](#table-of-contents)
-  - [Installation](#installation)
-  - [MVC Architecture](#mvc-architecture)
-  - [How MVC Works](#how-mvc-works)
 
 ## Installation
 
@@ -571,3 +565,27 @@ builder.Services.AddTransient<MySqlConnection>(_ =>
 
 builder.Services.AddDbContext<ProductContext>(options => options.UseMySQL(connectionString));
 ```
+
+## Migrations
+
+Migrations helps keep the database in sync with the data models in production.
+
+When you develop a new application, your data model changes frequently, and each time the model changes, it gets out of sync with the database. You started these tutorials by configuring the Entity Framework to create the database if it doesn't exist. Then each time you change the data model -- add, remove, or change entity classes or change your DbContext class -- you can delete the database and EF creates a new one that matches the model, and seeds it with test data.
+
+When the application is running in production it's usually storing data that you want to keep, and you don't want to lose everything each time you make a change such as adding a new column. The EF Core Migrations feature solves this problem by enabling EF to update the database schema instead of creating a new database.
+
+**We are going to use EF Core tools to create migrations and update our databse**
+
+We can install globally or locally
+
+```
+dotnet tool install --global dotnet-ef
+```
+
+## Create Your Initial Migration
+
+```
+dotnet ef migrations add InitialCreate
+```
+
+You can learn further more from [here](https://learn.microsoft.com/en-us/aspnet/core/data/ef-mvc/?view=aspnetcore-7.0)
