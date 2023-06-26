@@ -22,8 +22,6 @@ On Dotnet MVC, CRUD operations are carried out.One of the Entity Framework examp
 [How MVC Works]("#howmvcworks")
 
 <a name = "Installation">
-<a name = "MVC">
-<a name = "howmvcworks">
 
 ## Installation
 
@@ -65,5 +63,10 @@ You can install a specific major version with the --channel parameter to indicat
 ```
 ./dotnet-install.sh --channel 7.0
 ```
+<a name ="MVC">
 
 ## MVC Architecture
+
+<a name = "howmvcworks">
+
+## How MVC Works
