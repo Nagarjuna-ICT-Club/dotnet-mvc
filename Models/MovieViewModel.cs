@@ -10,7 +10,6 @@ public class MovieViewModel {
     public string? Title { get; set; }
 
     [DataType(DataType.Date)]
-    // public DateTime releaseDate { get; set;}
     public DateOnly releaseDate { get; set; }
     
 }

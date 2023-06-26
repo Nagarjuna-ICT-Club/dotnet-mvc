@@ -17,9 +17,12 @@ On Dotnet MVC, CRUD operations are carried out.One of the Entity Framework examp
 
 ## Table of Contents
 
-[Installation](#Installation) <br>
-[MVC Architecture]("#MVC-Architecture") <br>
-[How MVC Works]("#How-MVC-Works")
+- [Introduction to Dotnet](#introduction-to-dotnet)
+  - [We'll go through](#well-go-through)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [MVC Architecture](#mvc-architecture)
+  - [How MVC Works](#how-mvc-works)
 
 ## Installation
 
@@ -70,4 +73,128 @@ The Model-View-Controller (MVC) framework is an architectural/design pattern tha
 
 ## How MVC Works
 
-First, the browser sends a request to the Controller. Then, the Controller interacts with the Model to send and receive data. The Controller then interacts with the View to render the data
+First, the browser sends a request to the Controller. Then, the Controller interacts with the Model to send and receive data. The Controller then interacts with the View to render the data.
+
+## Folder Structure of Dotnet MVC App
+
+![folder structure of mvc app](https://res.cloudinary.com/codewithsudeep/image/upload/v1687754358/Content%20for%20github/Screenshot_from_2023-06-26_10-24-08_l5sd2e.png)
+
+A controller is responsible for controlling the way that a user interacts with an MVC application. A controller contains the flow control logic for an ASP.NET MVC application. A controller determines what response to send back to a user when a user makes a browser request.
+
+An MVC model contains all of your application logic that is not contained in a view or a controller. The model should contain all of your application business logic, validation logic, and database access logic. For example, if you are using the Microsoft Entity Framework to access your database, then you would create your Entity Framework classes (your .edmx file) in the Models folder.
+
+A view contains the HTML markup and content that is sent to the browser. A view is the equivalent of a page when working with an ASP.NET MVC application.
+
+## Basic Crud Example
+
+For this example we'll be using Mysql.For using Mysql Database we'll be using MysqlConnector,let's install that using dotnet cli
+
+```
+dotnet add package MySqlConnector --version 2.2.6
+```
+
+We define our crud logic in our controller as it defines actions for our http requests.
+
+At first let's define our data in our model
+
+```
+using System.ComponentModel.DataAnnotations;
+namespace MvcMovie.Models;
+
+public class MovieViewModel {
+
+    public int id { get ; set;}
+
+    public string? genre {get; set; }
+
+    public string? Title { get; set; }
+
+    [DataType(DataType.Date)]
+    public DateOnly releaseDate { get; set; }
+
+}
+```
+
+For this purpose let's create a generic list of our movie model in our controller. For full code you can see Controller > MovieController.cs
+
+```
+    private List<MovieViewModel> movies = new List<MovieViewModel>();
+```
+
+Let's define our controller for listing our movies list in Homepage
+
+```
+    public IActionResult Index()
+    {
+        using var connection = new MySqlConnection("Server=localhost;User ID=root;password=7227;Database=movies;ConvertZeroDatetime=True");
+        connection.Open();
+
+        string query = "Select * from movies";
+        using var command = new MySqlCommand(query, connection);
+        MySqlDataReader reader = command.ExecuteReader();
+
+        while (reader.Read())
+        {
+            MovieViewModel movie = new MovieViewModel();
+            movie.id = Convert.ToInt32(reader["id"]);
+            movie.Title = reader["title"].ToString();
+            movie.genre = Convert.ToString(reader["genre"]);
+            movie.releaseDate = DateOnly.FromDateTime(Convert.ToDateTime(reader["release_year"]));
+            movies.Add(movie);
+        }
+        return View(movies);
+    }
+```
+
+Let's define our View for Movies Home in Views > Movie > Index.cshtml
+
+```
+@{
+  ViewData["Title"] = "Movie Page";
+}
+
+<div class="text-center">
+  <h1 class="display-4">Welcome to Movie Page</h1>
+  <a asp-controller="Movie" asp-action="NewMovie" >Create a new Movie</a>
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Genre</th>
+        <th>Title</th>
+        <th>ReleaseDate</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (MovieViewModel movie in Model)
+      {
+        <tr class="flex gap-5">
+          <td>@movie.id</td>
+          <td>@movie.genre</td>
+          <td>@movie.Title</td>
+          <td>@movie.releaseDate</td>
+          <div style="diplay:flex;gap:5px;">
+            <a
+              asp-action="Detail"
+              asp-route-id="@movie.id"
+              class="btn btn-primary"
+              >View</a
+            >
+            <a
+              asp-action="Edit"
+              asp-route-id="@movie.id"
+              class="btn btn-primary"
+              >Edit</a
+            >
+            <a asp-action="Delete" asp-route-id="@movie.id" class="btn btn-danger"
+              >Delete</a
+            >
+          </div>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+```
+ 
