@@ -18,10 +18,8 @@ On Dotnet MVC, CRUD operations are carried out.One of the Entity Framework examp
 ## Table of Contents
 
 [Installation](#Installation) <br>
-[MVC Architecture]("#MVC") <br>
-[How MVC Works]("#howmvcworks")
-
-<a name = "Installation">
+[MVC Architecture]("#MVC-Architecture") <br>
+[How MVC Works]("#How-MVC-Works")
 
 ## Installation
 
@@ -63,10 +61,13 @@ You can install a specific major version with the --channel parameter to indicat
 ```
 ./dotnet-install.sh --channel 7.0
 ```
-<a name ="MVC">
 
 ## MVC Architecture
 
-<a name = "howmvcworks">
+The Model-View-Controller (MVC) framework is an architectural/design pattern that separates an application into three main logical components Model, View, and Controller.
+
+![alt text](https://res.cloudinary.com/codewithsudeep/image/upload/v1687752549/Content%20for%20github/Screenshot_from_2023-06-26_09-52-58_d3kfhw.png)
 
 ## How MVC Works
+
+First, the browser sends a request to the Controller. Then, the Controller interacts with the Model to send and receive data. The Controller then interacts with the View to render the data
