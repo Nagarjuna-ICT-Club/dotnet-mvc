@@ -22,7 +22,7 @@
           <td>@movie.genre</td>
           <td>@movie.Title</td>
           <td>@movie.releaseDate</td>
-          <div style="diplay:flex;gap:5px;">
+          <td style="diplay:flex;gap:5px;">
             <a
               asp-action="Detail"
               asp-route-id="@movie.id"
@@ -38,7 +38,7 @@
             <a asp-action="Delete" asp-route-id="@movie.id" class="btn btn-danger"
               >Delete</a
             >
-          </div>
+          </td>
         </tr>
       }
     </tbody>
